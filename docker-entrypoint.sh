@@ -14,9 +14,9 @@ mkdir -p Customizing/global/plugins/Services/Repository/RepositoryObject
 cd Customizing/global/plugins/Services/Repository/RepositoryObject
 
 # Add optional plugins:
-git clone -b release_7 --single-branch https://github.com/srsolutionsag/H5P.git H5P
-git clone -b release_7 --single-branch https://github.com/Minervis-GmbH/BigBlueButton-Ilias-Plugin.git BigBlueButton/
-git clone -b release7 --single-branch https://github.com/internetlehrer/MultiVc MultiVc
+git clone -b release_8 --single-branch https://github.com/srsolutionsag/H5P.git H5P
+git clone -b release_8 --single-branch https://github.com/Minervis-GmbH/BigBlueButton-Ilias-Plugin.git BigBlueButton/
+git clone -b release8 --single-branch https://github.com/internetlehrer/MultiVc MultiVc
 
 # Finished:
 echo -e '\n\nILIAS Status:'
