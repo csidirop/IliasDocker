@@ -17,9 +17,9 @@ git clone -b release_8 --single-branch https://github.com/srsolutionsag/H5P.git 
 git clone -b release_8 --single-branch https://github.com/Minervis-GmbH/BigBlueButton-Ilias-Plugin.git BigBlueButton/
 git clone -b release8 --single-branch https://github.com/internetlehrer/MultiVc MultiVc
 
+# Install plugins:
 cd ~/html
-php setup/setup.php build-artifacts -vvv
-php setup/setup.php update --yes
+composer install --no-dev
 
 # Finished:
 echo -e '\n\nILIAS Status:'
