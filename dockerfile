@@ -1,5 +1,5 @@
 # Baseimage PHP 8.0 with Apache2 on Debian 11 bullseye:
-FROM php:8.0-apache
+FROM php:8.2-apache
 LABEL authors='Christos Sidiropoulos <Christos.Sidiropoulos@uni-mannheim.de>'
 
 ENV LANGUAGE en_US:en
@@ -64,14 +64,15 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
     xsl \
     xml \
     # xmlrpc \
-    zip 
+    zip \
+  && pecl install imagick \
+  && docker-php-ext-enable imagick
 
 WORKDIR /var/www/html/
 
 # Install ILIAS: (https://docu.ilias.de/ilias.php?baseClass=illmpresentationgui&cmd=layout&ref_id=367&obj_id=124784#get-code)
-RUN git clone https://github.com/ILIAS-eLearning/ILIAS.git . \
+RUN git clone -b release_9 --single-branch https://github.com/ILIAS-eLearning/ILIAS.git . \
   && git config --global --add safe.directory /var/www/html \
-  # && git checkout release_8 \
   && mkdir /var/www/files \
   && mkdir /var/log/ilias \
   && chown -R www-data:www-data /var/www/ \
@@ -86,8 +87,8 @@ RUN composer install --no-dev \
 
 COPY data/php.ini /usr/local/etc/php/
 COPY data/config.json /var/www/
-# RUN php setup/setup.php install /var/www/config.json --yes
 COPY docker-entrypoint.sh /
 
-# Start apache2 (https://github.com/docker-library/php/blob/master/8.3/bullseye/apache/apache2-foreground)
+# # Start apache2 (https://github.com/docker-library/php/blob/master/8.3/bullseye/apache/apache2-foreground)
 CMD /docker-entrypoint.sh & apache2-foreground
+# CMD apache2-foreground
